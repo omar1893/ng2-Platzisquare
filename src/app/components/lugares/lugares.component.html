@@ -1,0 +1,49 @@
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-marker *ngFor="let lugar of lugares" [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
+</agm-map>
+
+<hr>
+
+<!-- <div id="cuadrado" [@contenedorAnimable]="state" (@contenedorAnimable.start)="animacionInicia($event)" (@contenedorAnimable.done)="animacionTermina($event)"></div>
+<button class="btn btn-default" (click)="animar()">
+  Animar
+</button> -->
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-8">
+      <h2>Lugares Cercanos:</h2>
+      <button class="btn btn-primary" routerLink="/crear/new">
+        Crear Nuevo Negocio
+      </button>
+      <ul class="list-group">
+        <ng-container *ngFor="let lugar of lugares">
+          <li class="list-group-item">
+            <a routerLink="/crear/{{lugar.id}}">
+              <h3>{{lugar.nombre}}</h3>
+            </a>
+            <small>Creado: {{lugar.id | date:"mediumTime"}}</small>
+            <p [innerHtml]="lugar.descripcion|linkify">{{lugar.descripcion|linkify}}</p>
+          </li>
+          <br>
+        </ng-container>
+      </ul>
+    </div>
+
+    <div class="col-md-4"  [@contenedorAnimable]="state">
+      <h2>Lugares Destacados:</h2>
+      <ng-container *ngFor="let lugar of lugares">
+        <div class="bg-warning padding" *ngIf="lugar.plan == 'pagado'">
+          <a routerLink="/crear/{{lugar.id}}">
+            <h3>{{lugar.nombre}}</h3>
+          </a>
+          <p [innerHtml]="lugar.descripcion|linkify">{{lugar.descripcion|linkify}}</p>
+        </div>
+        <br>
+      </ng-container>
+    </div>
+
+  </div>
+
+</div>
